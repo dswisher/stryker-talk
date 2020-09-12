@@ -1,5 +1,4 @@
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,10 +35,10 @@ namespace Lightning.Test
         public async Task NewFileCopiedToNormalBucket()
         {
             // Arrange
-            var lastModified = DateTime.UtcNow.Subtract(TimeSpan.FromDays(2));
+            var age = 2;
 
             // Act
-            await copier.Copy(Key, lastModified, stoppingToken);
+            await copier.Copy(Key, age, stoppingToken);
 
             // Assert
             s3.Verify(x => x.CopyObjectAsync(It.IsAny<CopyObjectRequest>(), stoppingToken));
@@ -50,10 +49,10 @@ namespace Lightning.Test
         public async Task OldFileCopiedToGlacierBucket()
         {
             // Arrange
-            var lastModified = DateTime.UtcNow.Subtract(TimeSpan.FromDays(90));
+            var age = 90;
 
             // Act
-            await copier.Copy(Key, lastModified, stoppingToken);
+            await copier.Copy(Key, age, stoppingToken);
 
             // Assert
             s3.Verify(x => x.CopyObjectAsync(It.IsAny<CopyObjectRequest>(), stoppingToken));

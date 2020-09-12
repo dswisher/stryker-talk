@@ -1,5 +1,4 @@
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,10 +20,10 @@ namespace Lightning
         }
 
 
-        public async Task Copy(string key, DateTime lastModified, CancellationToken stoppingToken)
+        public async Task Copy(string key, int age, CancellationToken stoppingToken)
         {
             string archiveBucketName;
-            if (DateTime.UtcNow - lastModified > TimeSpan.FromDays(30))
+            if (age > 30)
             {
                 archiveBucketName = "glacier-bucket";
             }
