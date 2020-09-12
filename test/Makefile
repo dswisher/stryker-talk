@@ -12,6 +12,7 @@ report:
 
 mutants:
 	dotnet stryker --log-file
+	./open-recent-stryker.sh
 
 clean:
 	dotnet clean
