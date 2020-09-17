@@ -14,4 +14,5 @@ This is a quick talk to demo mutation testing in C# using [Stryker](https://stry
 * Stryker [home page](https://stryker-mutator.io/) - [github](https://github.com/stryker-mutator/) - dotnet [github](https://github.com/stryker-mutator/stryker-net)
 * Article on [CSharp Academy](http://csharp.academy/mutation-testing/)
 * Alternative - Fettle - [blog post](https://medium.com/comparethemarket/mutation-testing-in-net-an-experiment-afc0d8ef9a44) - [github](https://github.com/comparethemarket/fettle/)
+* The [article](https://testing.googleblog.com/2020/08/code-coverage-best-practices.html) on code coverage where I first heard the term "mutation testing"
 
