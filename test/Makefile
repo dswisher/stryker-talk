@@ -11,7 +11,7 @@ report:
 	dotnet reportgenerator -reports:coverage.opencover.xml -targetdir:coveragereport
 
 mutants:
-	dotnet stryker --log-file
+	dotnet stryker
 	./open-recent-stryker.sh
 
 clean:

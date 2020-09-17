@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using Amazon.S3;
 using Amazon.S3.Model;
+using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -24,18 +25,17 @@ namespace Lightning.Test
         public CopierTests()
         {
             copier = new Copier(s3.Object);
-
-            // Capture the request, so we can assert on it
-            s3.Setup(x => x.CopyObjectAsync(It.IsAny<CopyObjectRequest>(), stoppingToken))
-                .Callback<CopyObjectRequest, CancellationToken>((req, tok) => copyRequest = req);
         }
 
 
-        [Fact]
-        public async Task NewFileCopiedToNormalBucket()
+        [Theory]
+        [InlineData(2)]
+        public async Task NewFileCopiedToNormalBucket(int age)
         {
             // Arrange
-            var age = 2;
+            // Capture the request, so we can assert on it
+            s3.Setup(x => x.CopyObjectAsync(It.IsAny<CopyObjectRequest>(), stoppingToken))
+                .Callback<CopyObjectRequest, CancellationToken>((req, tok) => copyRequest = req);
 
             // Act
             await copier.Copy(Key, age, stoppingToken);
@@ -45,11 +45,14 @@ namespace Lightning.Test
         }
 
 
-        [Fact]
-        public async Task OldFileCopiedToGlacierBucket()
+        [Theory]
+        [InlineData(90)]
+        public async Task OldFileCopiedToGlacierBucket(int age)
         {
             // Arrange
-            var age = 90;
+            // Capture the request, so we can assert on it
+            s3.Setup(x => x.CopyObjectAsync(It.IsAny<CopyObjectRequest>(), stoppingToken))
+                .Callback<CopyObjectRequest, CancellationToken>((req, tok) => copyRequest = req);
 
             // Act
             await copier.Copy(Key, age, stoppingToken);
